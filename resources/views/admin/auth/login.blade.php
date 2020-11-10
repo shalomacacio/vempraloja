@@ -10,8 +10,7 @@
     <meta name="csrf-token" content={{csrf_token()}}>
 
     {{-- Title --}}
-    <title>Lote Livre</title>
-
+    <title>vempraloja</title>
     {{-- Custom stylesheets --}}
     @include('layouts.admin-partials.styles')
     @yield('css')
@@ -23,7 +22,7 @@
 
   <div class="login-box">
     <div class="login-logo">
-      <a href="#"><b>Lote Livre</a>
+      <a href="#"><b>VEM-PRA-LOJA</a>
     </div>
     <!-- /.login-logo -->
     <div class="card">

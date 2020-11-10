@@ -11,6 +11,15 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'SiteController@home')->name('site.home');
+
+Route::get('/login', 'AuthController@login')->name('login');
+Route::post('/auth', 'AuthController@auth')->name('auth');
+
+Route::group([ 'prefix' => 'admin' ,'middleware' => ['auth']], function () {
+
+    Route::get('/logout', 'AuthController@logout')->name('login');
+    Route::resource('products', 'ProductsController');
+
+  });
+  
