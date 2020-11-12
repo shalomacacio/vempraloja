@@ -10,7 +10,7 @@
     <meta name="csrf-token" content={{csrf_token()}}>
 
     {{-- Title --}}
-    <title>Lote Livre</title>
+    <title>vempraloja</title>
 
     {{-- Custom stylesheets --}}
     @include('layouts.admin-partials.styles')

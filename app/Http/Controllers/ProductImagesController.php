@@ -2,41 +2,40 @@
 
 namespace App\Http\Controllers;
 
-use App\Entities\ProductImage;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
-use App\Http\Requests\ProductCreateRequest;
-use App\Http\Requests\ProductUpdateRequest;
-use App\Repositories\ProductRepository;
-use App\Validators\ProductValidator;
+use App\Http\Requests\ProductImageCreateRequest;
+use App\Http\Requests\ProductImageUpdateRequest;
+use App\Repositories\ProductImageRepository;
+use App\Validators\ProductImageValidator;
 
 /**
- * Class ProductsController.
+ * Class ProductImagesController.
  *
  * @package namespace App\Http\Controllers;
  */
-class ProductsController extends Controller
+class ProductImagesController extends Controller
 {
     /**
-     * @var ProductRepository
+     * @var ProductImageRepository
      */
     protected $repository;
 
     /**
-     * @var ProductValidator
+     * @var ProductImageValidator
      */
     protected $validator;
 
     /**
-     * ProductsController constructor.
+     * ProductImagesController constructor.
      *
-     * @param ProductRepository $repository
-     * @param ProductValidator $validator
+     * @param ProductImageRepository $repository
+     * @param ProductImageValidator $validator
      */
-    public function __construct(ProductRepository $repository, ProductValidator $validator)
+    public function __construct(ProductImageRepository $repository, ProductImageValidator $validator)
     {
         $this->repository = $repository;
         $this->validator  = $validator;
@@ -50,51 +49,38 @@ class ProductsController extends Controller
     public function index()
     {
         $this->repository->pushCriteria(app('Prettus\Repository\Criteria\RequestCriteria'));
-        $products = $this->repository->all();
+        $productImages = $this->repository->all();
 
         if (request()->wantsJson()) {
 
             return response()->json([
-                'data' => $products,
+                'data' => $productImages,
             ]);
         }
 
-        return view('admin.products.index', compact('products'));
+        return view('productImages.index', compact('productImages'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  ProductCreateRequest $request
+     * @param  ProductImageCreateRequest $request
      *
      * @return \Illuminate\Http\Response
      *
      * @throws \Prettus\Validator\Exceptions\ValidatorException
      */
-    public function store(ProductCreateRequest $request)
+    public function store(ProductImageCreateRequest $request)
     {
         try {
 
             $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_CREATE);
 
-            $product = $this->repository->create($request->all());
-
-            for($i = 0; $i < count($request->allFiles()['img']); $i++){
-
-              $file = $request->allFiles()['img'][$i];
-              $extension = $file->extension();
-              $fileName = "prod_".$i.".".$extension;
-
-              $productImage = new ProductImage();
-              $productImage->product_id = $product->id;
-              $productImage->img = $file->storeAs('site/img/products/'.$product->id.'/images', $fileName);
-              $productImage->save();
-              unset($productImage);
-            }
+            $productImage = $this->repository->create($request->all());
 
             $response = [
-                'message' => 'Product created.',
-                'data'    => $product->toArray(),
+                'message' => 'ProductImage created.',
+                'data'    => $productImage->toArray(),
             ];
 
             if ($request->wantsJson()) {
@@ -124,16 +110,16 @@ class ProductsController extends Controller
      */
     public function show($id)
     {
-        $product = $this->repository->find($id);
+        $productImage = $this->repository->find($id);
 
         if (request()->wantsJson()) {
 
             return response()->json([
-                'data' => $product,
+                'data' => $productImage,
             ]);
         }
 
-        return view('admin.products.show', compact('product'));
+        return view('productImages.show', compact('productImage'));
     }
 
     /**
@@ -145,32 +131,32 @@ class ProductsController extends Controller
      */
     public function edit($id)
     {
-        $product = $this->repository->find($id);
+        $productImage = $this->repository->find($id);
 
-        return view('admin.products.edit', compact('product'));
+        return view('productImages.edit', compact('productImage'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  ProductUpdateRequest $request
+     * @param  ProductImageUpdateRequest $request
      * @param  string            $id
      *
      * @return Response
      *
      * @throws \Prettus\Validator\Exceptions\ValidatorException
      */
-    public function update(ProductUpdateRequest $request, $id)
+    public function update(ProductImageUpdateRequest $request, $id)
     {
         try {
 
             $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_UPDATE);
 
-            $product = $this->repository->update($request->all(), $id);
+            $productImage = $this->repository->update($request->all(), $id);
 
             $response = [
-                'message' => 'Product updated.',
-                'data'    => $product->toArray(),
+                'message' => 'ProductImage updated.',
+                'data'    => $productImage->toArray(),
             ];
 
             if ($request->wantsJson()) {
@@ -208,11 +194,11 @@ class ProductsController extends Controller
         if (request()->wantsJson()) {
 
             return response()->json([
-                'message' => 'Product deleted.',
+                'message' => 'ProductImage deleted.',
                 'deleted' => $deleted,
             ]);
         }
 
-        return redirect()->back()->with('message', 'Product deleted.');
+        return redirect()->back()->with('message', 'ProductImage deleted.');
     }
 }
