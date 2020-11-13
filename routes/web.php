@@ -19,7 +19,10 @@ Route::post('/auth', 'AuthController@auth')->name('auth');
 Route::group([ 'prefix' => 'admin' ,'middleware' => ['auth']], function () {
 
     Route::get('/logout', 'AuthController@logout')->name('login');
+    
+    Route::resource('links', 'LinksController');
     Route::resource('products', 'ProductsController');
+    Route::resource('categories', 'CategoriesController');
 
   });
   

@@ -36,6 +36,12 @@
                 <p>Produtos</p>
               </a>
             </li>
+            {{-- <li class="nav-item">
+              <a href="{{ route('links.index') }}" class="nav-link">
+                <i class="fa fa-circle-o nav-icon"></i>
+                <p>Links</p>
+              </a>
+            </li> --}}
           </ul>
         </li>
       </ul>

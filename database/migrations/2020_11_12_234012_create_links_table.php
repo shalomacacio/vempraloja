@@ -4,9 +4,9 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
 /**
- * Class CreateProductsTable.
+ * Class CreateLinksTable.
  */
-class CreateProductsTable extends Migration
+class CreateLinksTable extends Migration
 {
 	/**
 	 * Run the migrations.
@@ -15,13 +15,17 @@ class CreateProductsTable extends Migration
 	 */
 	public function up()
 	{
-		Schema::create('products', function(Blueprint $table) {
+		Schema::create('links', function(Blueprint $table) {
 			$table->increments('id');
 			$table->integer('category_id');
 			$table->string('name');
 			$table->decimal('price');
-			$table->string('link');
 			$table->string('description')->nullable();
+			$table->string('link');
+			$table->string('img1');
+			$table->string('img2');
+			$table->string('img3');
+			$table->string('img4');
             $table->timestamps();
 		});
 	}
@@ -33,6 +37,6 @@ class CreateProductsTable extends Migration
 	 */
 	public function down()
 	{
-		Schema::drop('products');
+		Schema::drop('links');
 	}
 }

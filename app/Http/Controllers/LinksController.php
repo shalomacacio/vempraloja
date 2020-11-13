@@ -2,40 +2,40 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
 use App\Http\Requests;
+use Illuminate\Http\Request;
+use App\Validators\LinkValidator;
+use Illuminate\Support\Facades\DB;
+use App\Repositories\LinkRepository;
+use App\Http\Requests\LinkCreateRequest;
+use App\Http\Requests\LinkUpdateRequest;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
-use App\Http\Requests\CategoryCreateRequest;
-use App\Http\Requests\CategoryUpdateRequest;
-use App\Repositories\CategoryRepository;
-use App\Validators\CategoryValidator;
 
 /**
- * Class CategoriesController.
+ * Class LinksController.
  *
  * @package namespace App\Http\Controllers;
  */
-class CategoriesController extends Controller
+class LinksController extends Controller
 {
     /**
-     * @var CategoryRepository
+     * @var LinkRepository
      */
     protected $repository;
 
     /**
-     * @var CategoryValidator
+     * @var LinkValidator
      */
     protected $validator;
 
     /**
-     * CategoriesController constructor.
+     * LinksController constructor.
      *
-     * @param CategoryRepository $repository
-     * @param CategoryValidator $validator
+     * @param LinkRepository $repository
+     * @param LinkValidator $validator
      */
-    public function __construct(CategoryRepository $repository, CategoryValidator $validator)
+    public function __construct(LinkRepository $repository, LinkValidator $validator)
     {
         $this->repository = $repository;
         $this->validator  = $validator;
@@ -49,38 +49,39 @@ class CategoriesController extends Controller
     public function index()
     {
         $this->repository->pushCriteria(app('Prettus\Repository\Criteria\RequestCriteria'));
-        $categories = $this->repository->all();
+        $links = $this->repository->all();
+        $categories = DB::table('categories')->get();
 
         if (request()->wantsJson()) {
 
             return response()->json([
-                'data' => $categories,
+                'data' => $links,
             ]);
         }
 
-        return view('admin.categories.index', compact('categories'));
+        return view('admin.links.index', compact('links', 'categories'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  CategoryCreateRequest $request
+     * @param  LinkCreateRequest $request
      *
      * @return \Illuminate\Http\Response
      *
      * @throws \Prettus\Validator\Exceptions\ValidatorException
      */
-    public function store(CategoryCreateRequest $request)
+    public function store(LinkCreateRequest $request)
     {
         try {
 
             $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_CREATE);
 
-            $category = $this->repository->create($request->all());
+            $link = $this->repository->create($request->all());
 
             $response = [
-                'message' => 'Category created.',
-                'data'    => $category->toArray(),
+                'message' => 'Link created.',
+                'data'    => $link->toArray(),
             ];
 
             if ($request->wantsJson()) {
@@ -110,16 +111,16 @@ class CategoriesController extends Controller
      */
     public function show($id)
     {
-        $category = $this->repository->find($id);
+        $link = $this->repository->find($id);
 
         if (request()->wantsJson()) {
 
             return response()->json([
-                'data' => $category,
+                'data' => $link,
             ]);
         }
 
-        return view('admin.categories.show', compact('category'));
+        return view('admin.links.show', compact('link'));
     }
 
     /**
@@ -131,32 +132,32 @@ class CategoriesController extends Controller
      */
     public function edit($id)
     {
-        $category = $this->repository->find($id);
+        $link = $this->repository->find($id);
 
-        return view('admin.categories.edit', compact('category'));
+        return view('admin.links.edit', compact('link'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  CategoryUpdateRequest $request
+     * @param  LinkUpdateRequest $request
      * @param  string            $id
      *
      * @return Response
      *
      * @throws \Prettus\Validator\Exceptions\ValidatorException
      */
-    public function update(CategoryUpdateRequest $request, $id)
+    public function update(LinkUpdateRequest $request, $id)
     {
         try {
 
             $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_UPDATE);
 
-            $category = $this->repository->update($request->all(), $id);
+            $link = $this->repository->update($request->all(), $id);
 
             $response = [
-                'message' => 'Category updated.',
-                'data'    => $category->toArray(),
+                'message' => 'Link updated.',
+                'data'    => $link->toArray(),
             ];
 
             if ($request->wantsJson()) {
@@ -194,11 +195,11 @@ class CategoriesController extends Controller
         if (request()->wantsJson()) {
 
             return response()->json([
-                'message' => 'Category deleted.',
+                'message' => 'Link deleted.',
                 'deleted' => $deleted,
             ]);
         }
 
-        return redirect()->back()->with('message', 'Category deleted.');
+        return redirect()->back()->with('message', 'Link deleted.');
     }
 }
