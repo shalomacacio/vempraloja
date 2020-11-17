@@ -6,9 +6,9 @@
 				<div id="responsive-nav">
 					<!-- NAV -->
 					<ul class="main-nav nav navbar-nav">
-						<li class="active"><a href="#">Home</a></li>
-						<li><a href="#">Special Black Friday</a></li>
-						<li><a href="#">Cursos</a></li>
+						<li class="active"><a href="{{ route('site.home') }}">Home</a></li>
+						<li class="active"><a href="{{ route('site.black') }}">Especial Black Friday</a></li>
+						<li class="active"><a href="{{ route('site.cursos') }}">Cursos</a></li>
 					</ul>
 					<!-- /NAV -->
 				</div>

@@ -12,6 +12,8 @@
 */
 
 Route::get('/', 'SiteController@home')->name('site.home');
+Route::get('/black', 'SiteController@black')->name('site.black');
+Route::get('/cursos', 'SiteController@cursos')->name('site.cursos');
 
 Route::get('/login', 'AuthController@login')->name('login');
 Route::post('/auth', 'AuthController@auth')->name('auth');
@@ -19,10 +21,9 @@ Route::post('/auth', 'AuthController@auth')->name('auth');
 Route::group([ 'prefix' => 'admin' ,'middleware' => ['auth']], function () {
 
     Route::get('/logout', 'AuthController@logout')->name('login');
-    
     Route::resource('links', 'LinksController');
     Route::resource('products', 'ProductsController');
     Route::resource('categories', 'CategoriesController');
 
-  });
+});
   

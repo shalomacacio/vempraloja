@@ -9,6 +9,16 @@ class SiteController extends Controller
 {
     public function home(){
         $links = Link::all();
-        return view('site.home.index', compact('links'));
+        return view('site.index', compact('links'));
+    }
+
+    public function black(){
+         $links = Link::all();
+         return view('site.black', compact('links'));
+    }
+
+    public function cursos(){
+        // $links = Link::all();
+        return view('site.cursos');
     }
 }

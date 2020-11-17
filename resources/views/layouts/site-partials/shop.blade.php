@@ -13,7 +13,7 @@
 							</div>
 							<div class="shop-body">
 								<h3>Grupo<br>WhatsApp</h3>
-								<a href="#" class="cta-btn">Quero Entrar <i class="fa fa-arrow-circle-right"></i></a>
+								<a href="#" class="cta-btn"> Entrar <i class="fa fa-arrow-circle-right"></i></a>
 							</div>
 						</div>
 					</div>
@@ -27,7 +27,7 @@
 							</div>
 							<div class="shop-body">
 								<h3>Perfil <br>Instagram</h3>
-								<a href="https://www.instagram.com/vempraloja10/" class="cta-btn">Quero Seguir <i class="fa fa-arrow-circle-right"></i></a>
+								<a href="https://www.instagram.com/vempraloja10/" class="cta-btn"> Seguir <i class="fa fa-arrow-circle-right"></i></a>
 							</div>
 						</div>
 					</div>
@@ -41,7 +41,7 @@
 							</div>
 							<div class="shop-body">
 								<h3>Página <br>Facebook</h3>
-								<a href="https://www.facebook.com/vempraloja.vempraloja" class="cta-btn">Quero Curtir <i class="fa fa-arrow-circle-right"></i></a>
+								<a href="https://www.facebook.com/vempraloja.vempraloja" class="cta-btn"> Curtir <i class="fa fa-arrow-circle-right"></i></a>
 							</div>
 						</div>
 					</div>
