@@ -21,15 +21,16 @@ class Link extends Model implements Transformable
      * @var array
      */
     protected $fillable = [
-        'category_id',
+        'img',
         'name',
-        'price',
+        'disc',
+        'span',
+        'stars',
         'link',
-        'img1',
-        'img2',
-        'img3',
-        'img4',
+        'price',
+        'price_old',
         'description',
+        'category_id',
     ];
 
     public function category(){

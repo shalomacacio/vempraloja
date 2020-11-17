@@ -2,7 +2,7 @@
  @section('content')
  <!-- Content Wrapper. Contains page content -->
  <div class="content-wrapper">
- @include('admin.bannerPromocionals.page-header')
+  @include('admin.links.page-header')
 
   <!-- Main content -->
   <section class="content">
@@ -13,14 +13,14 @@
           <!-- general form elements disabled -->
           <div class="card card-primary">
             <div class="card-header">
-              <h3 class="card-title">Editar Banner</h3>
+              <h3 class="card-title">Editar Link</h3>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
-              <form role="form" action="{{ route('banner-promocionals.update', $bannerPromocional->id) }}" method="POST" enctype="multipart/form-data">
+              <form role="form" action="{{ route('links.update', $link->id) }}" method="POST">
                 @csrf
                 @method('PUT')
-                @include('admin.bannerPromocionals.form')
+                @include('admin.links.form')
                 <div class="card-footer">
                   <button type="submit" class="btn btn-info">Salvar</button>
                   <button type="submit" class="btn btn-default float-right">Cancelar</button>

@@ -19,13 +19,13 @@ class CreateLinksTable extends Migration
 			$table->increments('id');
 			$table->integer('category_id');
 			$table->string('name');
+			$table->string('img');
 			$table->decimal('price');
-			$table->string('description')->nullable();
+			$table->decimal('price_old')->nullable();
+			$table->string('disc')->nullable();
+			$table->string('span')->nullable();
+			$table->float('stars')->nullable();
 			$table->string('link');
-			$table->string('img1');
-			$table->string('img2');
-			$table->string('img3');
-			$table->string('img4');
             $table->timestamps();
 		});
 	}

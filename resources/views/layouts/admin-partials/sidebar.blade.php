@@ -31,17 +31,24 @@
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
+              <a href="{{ route('categories.index') }}" class="nav-link">
+                <i class="fa fa-circle-o nav-icon"></i>
+                <p>Categorias</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="{{ route('links.index') }}" class="nav-link">
+                <i class="fa fa-circle-o nav-icon"></i>
+                <p>Links</p>
+              </a>
+            </li>
+            <li class="nav-item">
               <a href="{{ route('products.index') }}" class="nav-link">
                 <i class="fa fa-circle-o nav-icon"></i>
                 <p>Produtos</p>
               </a>
             </li>
-            {{-- <li class="nav-item">
-              <a href="{{ route('links.index') }}" class="nav-link">
-                <i class="fa fa-circle-o nav-icon"></i>
-                <p>Links</p>
-              </a>
-            </li> --}}
+            
           </ul>
         </li>
       </ul>

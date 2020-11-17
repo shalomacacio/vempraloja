@@ -20,8 +20,12 @@ class CreateProductsTable extends Migration
 			$table->integer('category_id');
 			$table->string('name');
 			$table->decimal('price');
+			$table->decimal('price_old');
+			$table->string('disc');
+			$table->string('span');
+			$table->float('stars');
 			$table->string('link');
-			$table->string('description')->nullable();
+			$table->longText('description');
             $table->timestamps();
 		});
 	}

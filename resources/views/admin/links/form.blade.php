@@ -7,7 +7,7 @@
       <label>CATEGORIA:</label>
       <select class="form-control" name="category_id" style="width: 100%;">
         @foreach ($categories as $category)
-        <option value="{{ $category->id }}">{{ $category->name  }}</option>
+        <option value="{{ $category->id }}">{{ $category->name }}</option>
       @endforeach
       </select>
     </div>
@@ -25,68 +25,63 @@
   <div class="col-sm-4">
     <!-- text input -->
     <div class="form-group">
+      <label>Imagem:</label>
+      <input type="text" name="img" class="form-control" placeholder="Enter ..."
+        @isset( $link->img) value="{{ $link->img }}" @endisset>
+    </div>
+  </div>
+
+  <div class="col-sm-4">
+    <!-- text input -->
+    <div class="form-group">
       <label>Preço:</label>
       <input type="text" name="price" class="form-control" placeholder="Enter ..."
         @isset( $link->price) value="{{ $link->price }}" @endisset>
     </div>
   </div>
 
-  <div class="col-sm-12">
+  <div class="col-sm-4">
+    <!-- text input -->
+    <div class="form-group">
+      <label>Preço Antigo:</label>
+      <input type="text" name="price_old" class="form-control" placeholder="Enter ..."
+        @isset( $link->price_old) value="{{ $link->price_old }}" @endisset>
+    </div>
+  </div>
+
+  <div class="col-sm-4">
+    <!-- text input -->
+    <div class="form-group">
+      <label>Desconto:</label>
+      <input type="text" name="disc" class="form-control" placeholder="Enter ..."
+        @isset( $link->disc) value="{{ $link->disc }}" @endisset>
+    </div>
+  </div>
+
+  <div class="col-sm-4">
+    <!-- text input -->
+    <div class="form-group">
+      <label>Span:</label>
+      <input type="text" name="span" class="form-control" placeholder="Enter ..."
+        @isset( $link->span) value="{{ $link->span }}" @endisset>
+    </div>
+  </div>
+
+  <div class="col-sm-4">
+    <!-- text input -->
+    <div class="form-group">
+      <label>Estrelas:</label>
+      <input type="text" name="stars" class="form-control" placeholder="Enter ..."
+        @isset( $link->stars) value="{{ $link->stars }}" @endisset>
+    </div>
+  </div>
+
+  <div class="col-sm-4">
     <!-- text input -->
     <div class="form-group">
       <label>Link:</label>
       <input type="text" name="link" class="form-control" placeholder="Enter ..."
-        @isset( $product->link) value="{{ $product->link }}" @endisset>
-    </div>
-  </div>
-  
-  <div class="col-sm-12">
-    <!-- text input -->
-    <div class="form-group">
-      <label>Imagem 1:</label>
-      <input type="text" name="img1" class="form-control" placeholder="Enter ..."
-        @isset( $product->img1) value="{{ $product->img1 }}" @endisset>
-    </div>
-  </div>
-  
-  <div class="col-sm-12">
-    <!-- text input -->
-    <div class="form-group">
-      <label>Imagem 2:</label>
-      <input type="text" name="img2" class="form-control" placeholder="Enter ..."
-        @isset( $product->img2) value="{{ $product->img2 }}" @endisset>
-    </div>
-  </div>
-  
-  <div class="col-sm-12">
-    <!-- text input -->
-    <div class="form-group">
-      <label>Imagem 3:</label>
-      <input type="text" name="img3" class="form-control" placeholder="Enter ..."
-        @isset( $product->img3) value="{{ $product->img3 }}" @endisset>
-    </div>
-  </div>
-  
-  <div class="col-sm-12">
-    <!-- text input -->
-    <div class="form-group">
-      <label>Imagem 4:</label>
-      <input type="text" name="img4" class="form-control" placeholder="Enter ..."
-        @isset( $product->img4) value="{{ $product->img4 }}" @endisset>
-    </div>
-  </div>
-
-
-
-
-  <div class="col-sm-12">
-    <!-- textarea -->
-    <div class="form-group">
-      <label>Descrição</label>
-      <textarea class="textarea" placeholder="Place some text here" name="description"
-      style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">
-      @isset($product->descricao) {{ $product->descricao  }}  @endisset
-    </textarea>
+        @isset( $link->link) value="{{ $link->link }}" @endisset>
     </div>
   </div>
 

@@ -133,8 +133,9 @@ class LinksController extends Controller
     public function edit($id)
     {
         $link = $this->repository->find($id);
+        $categories = DB::table('categories')->get();
 
-        return view('admin.links.edit', compact('link'));
+        return view('admin.links.edit', compact('link', 'categories'));
     }
 
     /**
