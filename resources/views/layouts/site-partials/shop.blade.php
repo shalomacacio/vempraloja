@@ -41,7 +41,7 @@
 							</div>
 							<div class="shop-body">
 								<h3>Página <br>Facebook</h3>
-								<a href="#" class="cta-btn">Quero Curtir <i class="fa fa-arrow-circle-right"></i></a>
+								<a href="https://www.facebook.com/vempraloja.vempraloja" class="cta-btn">Quero Curtir <i class="fa fa-arrow-circle-right"></i></a>
 							</div>
 						</div>
 					</div>
