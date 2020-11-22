@@ -10,10 +10,10 @@
 
                 <div class="section-title">
 
-                    <div class="col-md-4 col-xs-6">
-						<div class="shop">
+                    <div class="col-md-6 col-xs-8">
+						<div class="logo_loja">
 							<div class="shop-img">
-                                <img src="{{ asset('vendor/site/img/magalu.png')}}" alt="">  
+                                <img src="{{ asset('vendor/site/img/amazon.png')}}" alt="">  
 
 							</div>
 						</div>

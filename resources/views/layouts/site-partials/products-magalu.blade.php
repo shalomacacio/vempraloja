@@ -11,7 +11,7 @@
                 <div class="section-title">
 
                     <div class="col-md-4 col-xs-6">
-						<div class="shop">
+						<div class="logo_loja">
 							<div class="shop-img">
                                 <img src="{{ asset('vendor/site/img/magalu.png')}}" alt="">  
 

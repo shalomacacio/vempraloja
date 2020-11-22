@@ -2188,3 +2188,14 @@ textarea.input {
     margin-top: 10px;
   }
 }
+
+
+/*=========================================================
+	xx -> CATEGORY LOJA
+===========================================================*/
+
+.logo_loja {
+  position: relative;
+  overflow: hidden;
+  margin: 5px 0px;
+}
