@@ -64,8 +64,16 @@ class CategoriesController extends Controller
 
         $result = json_decode($response->content);
 
-        // $categories = $result;
-        return dd($result->stores);
+        $cat = [
+          'requestInfo' => $result->requestInfo,
+          'stores' => $result->stores,
+          'pagination' => $result->pagination,
+        ];
+
+       $categories = $cat['stores'];
+
+        // $categories = $categories;
+        return dd($categories[0]);
         return view('admin.categories.index', compact('categories'));
     }
 
