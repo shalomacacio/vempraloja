@@ -4,50 +4,41 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-
 use App\Http\Requests;
-use Ixudra\Curl\Facades\Curl;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
-use App\Http\Requests\CategoryCreateRequest;
-use App\Http\Requests\CategoryUpdateRequest;
-use App\Repositories\CategoryRepository;
-use App\Validators\CategoryValidator;
+use App\Http\Requests\ClientCreateRequest;
+use App\Http\Requests\ClientUpdateRequest;
+use App\Repositories\ClientRepository;
+use App\Validators\ClientValidator;
 
 /**
- * Class CategoriesController.
+ * Class ClientsController.
  *
  * @package namespace App\Http\Controllers;
  */
-class CategoriesController extends Controller
+class ClientsController extends Controller
 {
     /**
-     * @var CategoryRepository
+     * @var ClientRepository
      */
     protected $repository;
 
     /**
-     * @var CategoryValidator
+     * @var ClientValidator
      */
     protected $validator;
 
     /**
-     * CategoriesController constructor.
+     * ClientsController constructor.
      *
-     * @param CategoryRepository $repository
-     * @param CategoryValidator $validator
+     * @param ClientRepository $repository
+     * @param ClientValidator $validator
      */
-
-    protected $baseUrl;
-    protected $sourceId;
-    protected $appToken;
-
-    public function __construct()
+    public function __construct(ClientRepository $repository, ClientValidator $validator)
     {
-        $this->baseUrl = env('BASE_URL');
-        $this->sourceId = '36909873';
-        $this->appToken = '16066839633338f8feedc';
-
+        $this->repository = $repository;
+        $this->validator  = $validator;
     }
 
     /**
@@ -55,40 +46,41 @@ class CategoriesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        $response = Curl::to('http://sandbox-api.lomadee.com/v3/'.$this->appToken.'/store/_all')
-        ->withData(['sourceId'=>$this->sourceId])
-        ->returnResponseObject()
-        ->get();
+        $this->repository->pushCriteria(app('Prettus\Repository\Criteria\RequestCriteria'));
+        $clients = $this->repository->all();
 
-        $result = json_decode($response->content);
+        if (request()->wantsJson()) {
 
-        // $categories = $result;
-        return dd($result->stores);
-        return view('admin.categories.index', compact('categories'));
+            return response()->json([
+                'data' => $clients,
+            ]);
+        }
+
+        return view('clients.index', compact('clients'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  CategoryCreateRequest $request
+     * @param  ClientCreateRequest $request
      *
      * @return \Illuminate\Http\Response
      *
      * @throws \Prettus\Validator\Exceptions\ValidatorException
      */
-    public function store(CategoryCreateRequest $request)
+    public function store(ClientCreateRequest $request)
     {
         try {
 
             $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_CREATE);
 
-            $category = $this->repository->create($request->all());
+            $client = $this->repository->create($request->all());
 
             $response = [
-                'message' => 'Category created.',
-                'data'    => $category->toArray(),
+                'message' => 'Client created.',
+                'data'    => $client->toArray(),
             ];
 
             if ($request->wantsJson()) {
@@ -118,16 +110,16 @@ class CategoriesController extends Controller
      */
     public function show($id)
     {
-        $category = $this->repository->find($id);
+        $client = $this->repository->find($id);
 
         if (request()->wantsJson()) {
 
             return response()->json([
-                'data' => $category,
+                'data' => $client,
             ]);
         }
 
-        return view('admin.categories.show', compact('category'));
+        return view('clients.show', compact('client'));
     }
 
     /**
@@ -139,32 +131,32 @@ class CategoriesController extends Controller
      */
     public function edit($id)
     {
-        $category = $this->repository->find($id);
+        $client = $this->repository->find($id);
 
-        return view('admin.categories.edit', compact('category'));
+        return view('clients.edit', compact('client'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  CategoryUpdateRequest $request
+     * @param  ClientUpdateRequest $request
      * @param  string            $id
      *
      * @return Response
      *
      * @throws \Prettus\Validator\Exceptions\ValidatorException
      */
-    public function update(CategoryUpdateRequest $request, $id)
+    public function update(ClientUpdateRequest $request, $id)
     {
         try {
 
             $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_UPDATE);
 
-            $category = $this->repository->update($request->all(), $id);
+            $client = $this->repository->update($request->all(), $id);
 
             $response = [
-                'message' => 'Category updated.',
-                'data'    => $category->toArray(),
+                'message' => 'Client updated.',
+                'data'    => $client->toArray(),
             ];
 
             if ($request->wantsJson()) {
@@ -202,11 +194,11 @@ class CategoriesController extends Controller
         if (request()->wantsJson()) {
 
             return response()->json([
-                'message' => 'Category deleted.',
+                'message' => 'Client deleted.',
                 'deleted' => $deleted,
             ]);
         }
 
-        return redirect()->back()->with('message', 'Category deleted.');
+        return redirect()->back()->with('message', 'Client deleted.');
     }
 }

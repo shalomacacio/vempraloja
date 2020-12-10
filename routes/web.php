@@ -25,5 +25,8 @@ Route::group([ 'prefix' => 'admin' ,'middleware' => ['auth']], function () {
     Route::resource('products', 'ProductsController');
     Route::resource('categories', 'CategoriesController');
 
+    Route::get('/ofertas', 'OffersController@index')->name('ofertas');
+    Route::get('/categorias', 'OffersController@categorias')->name('categorias');
+
 });
   

@@ -4,39 +4,23 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-
 use App\Http\Requests;
-use Ixudra\Curl\Facades\Curl;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
-use App\Http\Requests\CategoryCreateRequest;
-use App\Http\Requests\CategoryUpdateRequest;
-use App\Repositories\CategoryRepository;
-use App\Validators\CategoryValidator;
+use App\Http\Requests\OfferCreateRequest;
+use App\Http\Requests\OfferUpdateRequest;
+use App\Repositories\OfferRepository;
+use App\Validators\OfferValidator;
+use Curl;
 
 /**
- * Class CategoriesController.
+ * Class OffersController.
  *
  * @package namespace App\Http\Controllers;
  */
-class CategoriesController extends Controller
+class OffersController extends Controller
 {
-    /**
-     * @var CategoryRepository
-     */
-    protected $repository;
-
-    /**
-     * @var CategoryValidator
-     */
-    protected $validator;
-
-    /**
-     * CategoriesController constructor.
-     *
-     * @param CategoryRepository $repository
-     * @param CategoryValidator $validator
-     */
+    // BASE_URL=https://api.lomadee.com
 
     protected $baseUrl;
     protected $sourceId;
@@ -44,7 +28,7 @@ class CategoriesController extends Controller
 
     public function __construct()
     {
-        $this->baseUrl = env('BASE_URL');
+        $this->baseUrl = 'http://sandbox-api.lomadee.com/v3/';
         $this->sourceId = '36909873';
         $this->appToken = '16066839633338f8feedc';
 
@@ -55,40 +39,70 @@ class CategoriesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
-    {
+
+    public function index(Request $request){
+
         $response = Curl::to('http://sandbox-api.lomadee.com/v3/'.$this->appToken.'/store/_all')
-        ->withData(['sourceId'=>$this->sourceId])
-        ->returnResponseObject()
-        ->get();
+                ->withData(['sourceId'=>$this->sourceId])
+                ->get();
 
-        $result = json_decode($response->content);
+        if ($request->wantsJson()) {
+            return response()->json($response);
+        }
 
-        // $categories = $result;
-        return dd($result->stores);
-        return view('admin.categories.index', compact('categories'));
+        return $response;
+
     }
+    // 
+    public function categorias(){
+        $response = Curl::to('http://sandbox-api.lomadee.com/v3/'.$this->appToken.'/category/_all')
+                ->withData(['sourceId'=>$this->sourceId])
+                ->get();
+        return $response;
+    }
+
+    public function ofertas(){
+        $response = Curl::to('http://sandbox-api.lomadee.com/v3/'.$this->appToken.'/offer/_category/1')
+                ->withData(['sourceId'=>$this->sourceId])
+                ->get();
+        return $response;
+    }
+
+    // public function index()
+    // {
+    //     $this->repository->pushCriteria(app('Prettus\Repository\Criteria\RequestCriteria'));
+    //     $offers = $this->repository->all();
+
+    //     if (request()->wantsJson()) {
+
+    //         return response()->json([
+    //             'data' => $offers,
+    //         ]);
+    //     }
+
+    //     return view('offers.index', compact('offers'));
+    // }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  CategoryCreateRequest $request
+     * @param  OfferCreateRequest $request
      *
      * @return \Illuminate\Http\Response
      *
      * @throws \Prettus\Validator\Exceptions\ValidatorException
      */
-    public function store(CategoryCreateRequest $request)
+    public function store(OfferCreateRequest $request)
     {
         try {
 
             $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_CREATE);
 
-            $category = $this->repository->create($request->all());
+            $offer = $this->repository->create($request->all());
 
             $response = [
-                'message' => 'Category created.',
-                'data'    => $category->toArray(),
+                'message' => 'Offer created.',
+                'data'    => $offer->toArray(),
             ];
 
             if ($request->wantsJson()) {
@@ -118,16 +132,16 @@ class CategoriesController extends Controller
      */
     public function show($id)
     {
-        $category = $this->repository->find($id);
+        $offer = $this->repository->find($id);
 
         if (request()->wantsJson()) {
 
             return response()->json([
-                'data' => $category,
+                'data' => $offer,
             ]);
         }
 
-        return view('admin.categories.show', compact('category'));
+        return view('offers.show', compact('offer'));
     }
 
     /**
@@ -139,32 +153,32 @@ class CategoriesController extends Controller
      */
     public function edit($id)
     {
-        $category = $this->repository->find($id);
+        $offer = $this->repository->find($id);
 
-        return view('admin.categories.edit', compact('category'));
+        return view('offers.edit', compact('offer'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  CategoryUpdateRequest $request
+     * @param  OfferUpdateRequest $request
      * @param  string            $id
      *
      * @return Response
      *
      * @throws \Prettus\Validator\Exceptions\ValidatorException
      */
-    public function update(CategoryUpdateRequest $request, $id)
+    public function update(OfferUpdateRequest $request, $id)
     {
         try {
 
             $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_UPDATE);
 
-            $category = $this->repository->update($request->all(), $id);
+            $offer = $this->repository->update($request->all(), $id);
 
             $response = [
-                'message' => 'Category updated.',
-                'data'    => $category->toArray(),
+                'message' => 'Offer updated.',
+                'data'    => $offer->toArray(),
             ];
 
             if ($request->wantsJson()) {
@@ -202,11 +216,13 @@ class CategoriesController extends Controller
         if (request()->wantsJson()) {
 
             return response()->json([
-                'message' => 'Category deleted.',
+                'message' => 'Offer deleted.',
                 'deleted' => $deleted,
             ]);
         }
 
-        return redirect()->back()->with('message', 'Category deleted.');
+        return redirect()->back()->with('message', 'Offer deleted.');
     }
+
+    
 }
