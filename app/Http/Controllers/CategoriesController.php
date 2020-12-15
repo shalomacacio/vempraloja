@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 
 use App\Http\Requests;
+use Illuminate\Support\Arr;
 use Ixudra\Curl\Facades\Curl;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
@@ -13,6 +14,9 @@ use App\Http\Requests\CategoryCreateRequest;
 use App\Http\Requests\CategoryUpdateRequest;
 use App\Repositories\CategoryRepository;
 use App\Validators\CategoryValidator;
+use App\Entities\Category;
+use Illuminate\Support\Collection;
+
 
 /**
  * Class CategoriesController.
@@ -57,23 +61,24 @@ class CategoriesController extends Controller
      */
     public function index(Request $request)
     {
-        $response = Curl::to('http://sandbox-api.lomadee.com/v3/'.$this->appToken.'/store/_all')
+        $response = Curl::to($this->baseUrl.$this->appToken.'/category/_all')
         ->withData(['sourceId'=>$this->sourceId])
-        ->returnResponseObject()
+        ->asJson()
         ->get();
 
-        $result = json_decode($response->content);
+        $categories = collect(); 
 
-        $cat = [
-          'requestInfo' => $result->requestInfo,
-          'stores' => $result->stores,
-          'pagination' => $result->pagination,
-        ];
+        for($i=0; $i < count($response->categories) ; $i++ ){
 
-       $categories = $cat['stores'];
+            $category = new Category();
+            $category->id = $response->categories[$i]->id;
+            $category->name = $response->categories[$i]->name;
+            $category->hasOffer = $response->categories[$i]->hasOffer;
+            $category->link = $response->categories[$i]->link;
 
-        // $categories = $categories;
-        return dd($categories[0]);
+            $categories->push($category);
+        }
+
         return view('admin.categories.index', compact('categories'));
     }
 

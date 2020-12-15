@@ -18,23 +18,16 @@
          <!-- general form elements disabled -->
          <div class="card card-primary">
            <div class="card-header">
-             <h3 class="card-title">Novo Categoria</h3>
+             <h3 class="card-title">Categorias</h3>
            </div>
            <!-- /.card-header -->
            <div class="card-body">
-             <form role="form" action="{{ route('categories.store') }}" method="POST">
-               @csrf
-               @include('admin.categories.form')
-               <div class="card-footer">
-                 <button type="submit" class="btn btn-info">Salvar</button>
-                 <button type="submit" class="btn btn-default float-right">Cancelar</button>
-               </div>
-             </form>
+            @include('admin.categories.list')
            </div>
            <!-- /.card-body -->
          </div>
          <!-- /.card -->
-         @include('admin.categories.list')
+         
        </div>
        <!--/.col (right) -->
      </div>

@@ -28,5 +28,6 @@ Route::group([ 'prefix' => 'admin' ,'middleware' => ['auth']], function () {
     Route::get('/ofertas', 'OffersController@index')->name('ofertas');
     Route::get('/categorias', 'OffersController@categorias')->name('categorias');
 
+
 });
   

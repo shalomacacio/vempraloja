@@ -3,13 +3,23 @@
     <tr>
       <th style="width: 10px">ID</th>
       <th>NOME</th>
+      <th>OFERTA</th>
+      <th>LINK</th>
     </tr>
   </thead>
   <tbody>
-    @foreach ($categories as $category)
-    <tr>
-      <td>{{ $category }}</td>
+    {{-- {{ $categories }} --}}
+    
+    
+      @foreach ($categories as $category )
+      <tr>
+      <td>{{ $category->id }}</td>
+      <td>{{ $category->name }}</td>
+      <td>{{ $category->hasOffer }}</td>
+      <td>{{ $category->link }}</td>
     </tr>
-    @endforeach
+      @endforeach 
+    
+    
   </tbody>
 </table>

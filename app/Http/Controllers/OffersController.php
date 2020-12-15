@@ -58,7 +58,7 @@ class OffersController extends Controller
         $response = Curl::to('http://sandbox-api.lomadee.com/v3/'.$this->appToken.'/category/_all')
                 ->withData(['sourceId'=>$this->sourceId])
                 ->get();
-        return $response;
+        return dd($response);
     }
 
     public function ofertas(){
