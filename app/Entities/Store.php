@@ -7,11 +7,11 @@ use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
 
 /**
- * Class Client.
+ * Class Store.
  *
  * @package namespace App\Entities;
  */
-class Client extends Model implements Transformable
+class Store extends Model implements Transformable
 {
     use TransformableTrait;
 
@@ -20,12 +20,12 @@ class Client extends Model implements Transformable
      *
      * @var array
      */
-    protected $fillable = [];
+    protected $fillable = [
+        'id',
+        'name',
+        'thumbnail',
+        'link'
 
-    protected $attributes = [
-        'baseUrl'=> 'http://sandbox-api.lomadee.com/v3/',
-        'sourceId'=> '36909873',
-        'appToken' => '16066839633338f8feedc',
     ];
 
 }

@@ -37,9 +37,10 @@
 							<div class="header-search">
 								<form>
 									<select class="input-select">
-										<option value="0">Categorias</option>
-										<option value="1">Category 01</option>
-										<option value="1">Category 02</option>
+										@foreach ($categories as $category)
+										<option value="{{ $category->id }}">{{ Str::limit($category->name, 8, '...')  }}</option>
+										@endforeach
+
 									</select>
 									<input class="input" placeholder="buscar aqui">
 									<button class="search-btn">Buscar</button>
@@ -55,7 +56,7 @@
 								<div>
 									<a href="#">
 										<i class="fa fa-heart-o"></i>
-										<span>Favoritos</span>
+										<span>Ofertas Favoritas</span>
 										<div class="qty">2</div>
 									</a>
 								</div>

@@ -4,18 +4,16 @@ namespace App\Repositories;
 
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
-use App\Repositories\CategoryRepository;
-use App\Entities\Category;
-use App\Entities\Client;
-use App\Validators\CategoryValidator;
-use Ixudra\Curl\Facades\Curl;
+use App\Repositories\StoreRepository;
+use App\Entities\Store;
+use App\Validators\StoreValidator;
 
 /**
- * Class CategoryRepositoryEloquent.
+ * Class StoreRepositoryEloquent.
  *
  * @package namespace App\Repositories;
  */
-class CategoryRepositoryEloquent extends BaseRepository implements CategoryRepository
+class StoreRepositoryEloquent extends BaseRepository implements StoreRepository
 {
     /**
      * Specify Model class name
@@ -24,7 +22,7 @@ class CategoryRepositoryEloquent extends BaseRepository implements CategoryRepos
      */
     public function model()
     {
-        return Category::class;
+        return Store::class;
     }
 
     /**
@@ -35,7 +33,7 @@ class CategoryRepositoryEloquent extends BaseRepository implements CategoryRepos
     public function validator()
     {
 
-        return CategoryValidator::class;
+        return StoreValidator::class;
     }
 
 
@@ -46,7 +44,5 @@ class CategoryRepositoryEloquent extends BaseRepository implements CategoryRepos
     {
         $this->pushCriteria(app(RequestCriteria::class));
     }
-
-    
     
 }

@@ -23,11 +23,10 @@ Route::group([ 'prefix' => 'admin' ,'middleware' => ['auth']], function () {
     Route::get('/logout', 'AuthController@logout')->name('login');
     Route::resource('links', 'LinksController');
     Route::resource('products', 'ProductsController');
+    Route::resource('offers', 'OffersController');
     Route::resource('categories', 'CategoriesController');
 
-    Route::get('/ofertas', 'OffersController@index')->name('ofertas');
-    Route::get('/categorias', 'OffersController@categorias')->name('categorias');
-
-
+    // Route::get('/ofertas', 'OffersController@getByCategory')->name('ofertas');
+    // Route::get('/categorias', 'OffersController@categorias')->name('categorias');
 });
   
