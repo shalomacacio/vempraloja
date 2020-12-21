@@ -68,8 +68,6 @@ class Offer extends Model implements Transformable
         ->asJson()
         ->get();
 
-        return dd($response);
-
         $offers = collect(); 
 
         for($i=0; $i < count($response->offers) ; $i++ ){
@@ -85,5 +83,8 @@ class Offer extends Model implements Transformable
 
         return $offers;
     }
+
+
+    
 
 }

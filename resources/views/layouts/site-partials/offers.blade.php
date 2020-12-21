@@ -42,7 +42,7 @@
                                 <!-- product -->
                                 <div class="product">
                                     <div class="product-img">
-                                        <img src="{{ $offer->thumbnail }}" alt="">
+                                        <center><img src="{{ $offer->thumbnail }}" alt="" width="100px" height="100px"></center>
                                         <div class="product-label">
                                            @isset($offer->disc)
                                            <span class="sale">{{ $offer->disc }}</span>
@@ -54,8 +54,8 @@
                                         </div>
                                     </div>
                                     <div class="product-body">
-                                        <p class="product-category">{{ $offer->name }}</p>
-                                        <h3 class="product-name"><a href="{{ $offer->link }}">{{ $offer->name }}</a></h3>
+                                        {{-- <p class="product-category">{{ $offer->name }}</p> --}}
+                                        <h3 class="product-name"><a href="{{ $offer->link }}">{{ Str::limit($offer->name, 45) }}</a></h3>
                                         <h4 class="product-price">R$ {{ $offer->price }}<del class="product-old-price">R$ {{ $offer->discount }}</del></h4>
                                         <div class="product-rating">
                                             @for($i = 0; $i < $offer->stars; $i++ )

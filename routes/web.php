@@ -24,6 +24,7 @@ Route::group([ 'prefix' => 'admin' ,'middleware' => ['auth']], function () {
     Route::resource('links', 'LinksController');
     Route::resource('products', 'ProductsController');
     Route::resource('offers', 'OffersController');
+    Route::resource('stores', 'StoresController');
     Route::resource('categories', 'CategoriesController');
 
     // Route::get('/ofertas', 'OffersController@getByCategory')->name('ofertas');
