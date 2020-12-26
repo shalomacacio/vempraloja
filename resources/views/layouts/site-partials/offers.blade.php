@@ -8,7 +8,7 @@
             <!-- STORE -->
             <div id="store" class="col-md-12">
 
-                <!-- store products -->
+              <!-- store products -->
                 <div class="row">
                   @foreach ($ofertas as $offer)
                     <!-- product -->
@@ -27,21 +27,20 @@
                                 <h4 class="product-price">R$ {{ $offer->price }}</h4>
                                 <div class="product-btns">
                                     <button class="add-to-wishlist"><i class="fa fa-whatsapp"></i><span class="tooltipp">Whatsapp</span></button>
-                                    <a class="add-to-compare" href="target="_blank" href="https://work.facebook.com/sharer.php?display=page&u=https://developers.facebook.com" target = "_blank"">
-                                        <i class="fa fa-facebook"></i><span class="tooltipp"></span>
-                                    </a>
+                                    <button class="quick-view" onclick="sendFace({{ $offer }})"><i class="fa fa-facebook"></i><span class="tooltipp">Facebook</span></button>
                                     <button class="quick-view"><i class="fa fa-instagram"></i><span class="tooltipp">Instagram</span></button>
                                 </div>
                             </div>
                             <div class="add-to-cart">
-                                <a href="{{ $offer->link }}"><button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> vem pra loja </button></a>                            </div>
+                                <a href="{{ $offer->link }}"><button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> vem pra loja </button></a>                            
+                            </div>
                         </div>
                     </div>
                     <!-- /product -->
                   @endforeach
-                    <div class="clearfix visible-sm visible-xs"></div>
+                  <div class="clearfix visible-sm visible-xs"></div>
                 </div>
-                <!-- /store products -->
+              <!-- /store products -->
 
             </div>
             <!-- /STORE -->
@@ -51,3 +50,25 @@
     <!-- /container -->
 </div>
 <!-- /SECTION -->
+
+@section('javascript')
+<script>
+
+    function sendFace(oferta){
+    if (navigator.share) {
+        navigator.share({
+        title: 'WebShare API Demo',
+        url: 'https://codepen.io/ayoisaiah/pen/YbNazJ'
+        }).then(() => {
+        console.log('Thanks for sharing!');
+        })
+        .catch(console.error);
+    } else {
+        // fallback
+    }
+        
+    }
+
+</script>
+    
+@stop
