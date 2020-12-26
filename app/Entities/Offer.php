@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
 use Ixudra\Curl\Facades\Curl;
+use App\Entities\Category;
 
 /**
  * Class Offer.
@@ -30,9 +31,9 @@ class Offer extends Model implements Transformable
         'discount',
     ];
 
-    public function category(){
-        return $this->belongsTo('App\Entities\Category', 'id', 'id');
-    }
+    // public function getCategoryAttribute(){       
+    //     return dd($response);
+    // }
 
     public function store(){
         return $this->belongsTo('App\Entities\Story', 'id', 'id');
@@ -41,7 +42,7 @@ class Offer extends Model implements Transformable
     public function getByCategory(Client $client, $categoryId){
 
         $response = Curl::to($client->baseUrl.$client->appToken.'/offer/_category/'.$categoryId)
-        ->withData(['sourceId'=>$client->sourceId])
+        ->withData(['sourceId'=>$client->sourceId, 'size'=>'100'])
         ->asJson()
         ->get();
 
@@ -52,6 +53,7 @@ class Offer extends Model implements Transformable
             $offer->id = $response->offers[$i]->id;
             $offer->name = $response->offers[$i]->name;
             $offer->thumbnail = $response->offers[$i]->thumbnail;
+            $offer->category = $response->offers[$i]->category;
             $offer->price = $response->offers[$i]->price;
             $offer->discount = $response->offers[$i]->discount;
             $offer->link = $response->offers[$i]->link;
@@ -64,7 +66,7 @@ class Offer extends Model implements Transformable
     public function getByStore(Client $client, $store){
 
         $response = Curl::to($client->baseUrl.$client->appToken.'/offer/_store/'.$store)
-        ->withData(['sourceId'=>$client->sourceId])
+        ->withData(['sourceId'=>$client->sourceId, 'size'=>'100'])
         ->asJson()
         ->get();
 

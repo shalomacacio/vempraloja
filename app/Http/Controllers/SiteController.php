@@ -26,8 +26,8 @@ class SiteController extends Controller
     public function home(){
 
         $categories = $this->category->getAll($this->client);
-        $offers = $this->offer->getByStore($this->client, 5992);
-        return view('site.index', compact('offers', 'categories'));
+        $ofertas = $this->offer->getByStore($this->client, 5992);
+        return view('site.index', compact('categories', 'ofertas'));
     }
 
     public function black(){

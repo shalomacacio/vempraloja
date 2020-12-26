@@ -25,8 +25,8 @@ class OffersController extends Controller
 
     public function index(Request $request){
 
-        $response = Curl::to($this->client->baseUrl.$this->client->appToken.'/offer/_category/77')
-        ->withData(['sourceId'=>$this->client->sourceId])
+        $response = Curl::to($this->client->baseUrl.$this->client->appToken.'/offer/_category/1')
+        ->withData(['sourceId'=>$this->client->sourceId, 'size'=>'100'])
         ->asJson()
         ->get();
 
@@ -42,8 +42,6 @@ class OffersController extends Controller
             $offer->link = $response->offers[$i]->link;
             $offers->push($offer);
         }
-
-        // return dd($offers->where('price', 103.04));
 
         return view('admin.offers.index', compact('offers'));
     }

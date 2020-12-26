@@ -4,7 +4,7 @@
 			<div id="top-header">
 				<div class="container">
 					<ul class="header-links pull-left">
-						<li><a href="#"><i class="fa fa-whatsapp"></i> +55-85-987047679</a></li>
+						<li><a href="https://is.gd/D2UzkT"><i class="fa fa-whatsapp"></i> Grupo de Ofertas</a></li>
 						<li><a href="#"><i class="fa fa-envelope-o"></i> sac@vempraloja.com.br</a></li>
 						{{-- <li><a href="#"><i class="fa fa-map-marker"></i> 1734 Stonecoal Road</a></li> --}}
 					</ul>
@@ -53,13 +53,13 @@
 						<div class="col-md-3 clearfix">
 							<div class="header-ctn">
 								<!-- Wishlist -->
-								<div>
+								{{-- <div>
 									<a href="#">
 										<i class="fa fa-heart-o"></i>
 										<span>Ofertas Favoritas</span>
 										<div class="qty">2</div>
 									</a>
-								</div>
+								</div> --}}
 								<!-- /Wishlist -->
 
 								<!-- Menu Toogle -->

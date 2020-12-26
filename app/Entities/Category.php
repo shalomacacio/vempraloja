@@ -28,6 +28,15 @@ class Category extends Model implements Transformable
         'link'
     ];
 
+    public function getById(Client $client, $categoryId){
+        $response = Curl::to($client->baseUrl.$client->appToken.'/category/_id/'.$categoryId)
+        ->withData(['sourceId'=>$client->sourceId])
+        ->asJson()
+        ->get();
+
+        return $response;
+    }
+
     public function getAll(Client $client){
         $response = Curl::to($client->baseUrl.$client->appToken.'/category/_all')
         ->withData(['sourceId'=>$client->sourceId])
