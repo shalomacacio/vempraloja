@@ -27,7 +27,7 @@
                                 <h4 class="product-price">R$ {{ $offer->price }}</h4>
                                 <div class="product-btns">
                                     <button class="add-to-wishlist"><i class="fa fa-whatsapp"></i><span class="tooltipp">Whatsapp</span></button>
-                                    <button class="quick-view" onclick="sendFace({{ $offer }})"><i class="fa fa-facebook"></i><span class="tooltipp">Facebook</span></button>
+                                    <button class="quick-view"  onclick="share({{ $offer }})"><i class="fa fa-facebook"></i><span class="tooltipp">Facebook</span></button>
                                     <button class="quick-view"><i class="fa fa-instagram"></i><span class="tooltipp">Instagram</span></button>
                                 </div>
                             </div>
@@ -52,23 +52,14 @@
 <!-- /SECTION -->
 
 @section('javascript')
-<script>
+  <script>
 
-    function sendFace(oferta){
-    if (navigator.share) {
-        navigator.share({
-        title: 'WebShare API Demo',
-        url: 'https://codepen.io/ayoisaiah/pen/YbNazJ'
-        }).then(() => {
-        console.log('Thanks for sharing!');
-        })
-        .catch(console.error);
-    } else {
-        // fallback
-    }
-        
+    function share(oferta){
+        url = "https://www.facebook.com/sharer/sharer.php?display=popup&u="+oferta.thumbnail;
+        options = 'toolbar=0,status=0,resizable=1,width=626,height=436';
+        window.open(url,'sharer',options);
     }
 
-</script>
+  </script>
     
 @stop
