@@ -23,7 +23,7 @@
 </head>
   <body class="js">
     @include('layouts.site-partials.header')
-    @include('layouts.site-partials.nav')
+    {{-- @include('layouts.site-partials.nav') --}}
       @yield('content')
     @include('layouts.site-partials.footer')
     @include('layouts.site-partials.scripts')

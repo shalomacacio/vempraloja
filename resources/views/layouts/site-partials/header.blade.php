@@ -8,10 +8,10 @@
 						<li><a href="#"><i class="fa fa-envelope-o"></i> sac@vempraloja.com.br</a></li>
 						{{-- <li><a href="#"><i class="fa fa-map-marker"></i> 1734 Stonecoal Road</a></li> --}}
 					</ul>
-					<ul class="header-links pull-right">
-						{{-- <li><a href="#"><i class="fa fa-dollar"></i> USD</a></li> --}}
+					{{-- <ul class="header-links pull-right">
+						<li><a href="#"><i class="fa fa-dollar"></i> USD</a></li> 
 						<li><a href="#"><i class="fa fa-user-o"></i> Minha Conta</a></li>
-					</ul>
+					</ul> --}}
 				</div>
 			</div>
 			<!-- /TOP HEADER -->
