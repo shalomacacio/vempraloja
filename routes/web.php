@@ -12,7 +12,9 @@
 */
 
 Route::get('/', 'SiteController@home')->name('site.home');
+Route::get('/offer/{id}', 'SiteController@offer')->name('site.offer');
 Route::get('/black', 'SiteController@black')->name('site.black');
+Route::get('/search', 'SiteController@search')->name('site.search');
 Route::get('/cursos', 'SiteController@cursos')->name('site.cursos');
 
 Route::get('/login', 'AuthController@login')->name('login');

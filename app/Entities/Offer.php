@@ -39,6 +39,10 @@ class Offer extends Model implements Transformable
         return $this->belongsTo('App\Entities\Story', 'id', 'id');
     }
 
+    public function getById($id){
+
+    }
+
     public function getByCategory(Client $client, $categoryId){
 
         $response = Curl::to($client->baseUrl.$client->appToken.'/offer/_category/'.$categoryId)
@@ -68,6 +72,30 @@ class Offer extends Model implements Transformable
         $response = Curl::to($client->baseUrl.$client->appToken.'/offer/_store/'.$store)
         ->withData(['sourceId'=>$client->sourceId, 'size'=>'100'])
         ->asJson()
+        ->get();
+
+        $offers = collect(); 
+
+        for($i=0; $i < count($response->offers) ; $i++ ){
+            $offer = new Offer();
+            $offer->id = $response->offers[$i]->id;
+            $offer->name = $response->offers[$i]->name;
+            $offer->thumbnail = $response->offers[$i]->thumbnail;
+            $offer->price = $response->offers[$i]->price;
+            $offer->discount = $response->offers[$i]->discount;
+            $offer->link = $response->offers[$i]->link;
+            $offers->push($offer);
+        }
+
+        return $offers;
+    }
+
+    public function getByName(Client $client, $name, $categoryId){
+
+        $response = Curl::to($client->baseUrl.$client->appToken.'/offer/_search')
+        ->withData(['sourceId'=>$client->sourceId, 'keyword'=> $name , 
+                    'categoryId'=> $categoryId  , 'size'=>'100'])
+        ->asJson() 
         ->get();
 
         $offers = collect(); 

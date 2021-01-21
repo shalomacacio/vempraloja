@@ -30,6 +30,28 @@ class SiteController extends Controller
         return view('site.index', compact('categories', 'ofertas'));
     }
 
+    public function search(Request $request){
+
+        if($request->categoryId == 0){
+            $request->categoryId = [1,2];
+        }
+
+        $categories = $this->category->getAll($this->client);
+        $ofertas = $this->offer->getByName($this->client, $request->name, $request->categoryId );
+
+
+
+        return view('site.index', compact('categories', 'ofertas'));
+
+    }
+
+    public function offer($id){
+        return dd($id);
+
+        return view('site.offer');
+    }
+
+
     public function black(){
          $links = Link::all();
          return view('site.black', compact('links'));
