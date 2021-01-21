@@ -57,7 +57,7 @@ class Offer extends Model implements Transformable
             $offer->id = $response->offers[$i]->id;
             $offer->name = $response->offers[$i]->name;
             $offer->thumbnail = $response->offers[$i]->thumbnail;
-            $offer->category = $response->offers[$i]->category;
+            // $offer->category = $response->offers[$i]->category;
             $offer->price = $response->offers[$i]->price;
             $offer->discount = $response->offers[$i]->discount;
             $offer->link = $response->offers[$i]->link;
@@ -110,6 +110,8 @@ class Offer extends Model implements Transformable
             $offer->link = $response->offers[$i]->link;
             $offers->push($offer);
         }
+
+
 
         return $offers;
     }
