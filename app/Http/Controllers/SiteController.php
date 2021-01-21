@@ -38,7 +38,7 @@ class SiteController extends Controller
         }
 
         $categories = $this->category->getAll($this->client);
-        $ofertas = $this->offer->getByName($this->client, $request->name, $request->categoryId );
+        $ofertas = $this->offer->getByName($this->client, $request->name );
 
 
 

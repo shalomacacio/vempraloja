@@ -90,11 +90,10 @@ class Offer extends Model implements Transformable
         return $offers;
     }
 
-    public function getByName(Client $client, $name, $categoryId){
+    public function getByName(Client $client, $name){
 
         $response = Curl::to($client->baseUrl.$client->appToken.'/offer/_search')
-        ->withData(['sourceId'=>$client->sourceId, 'keyword'=> $name , 
-                    'categoryId'=> $categoryId  , 'size'=>'100'])
+        ->withData(['sourceId'=>$client->sourceId, 'keyword'=> $name , 'size'=>'100'])
         ->asJson() 
         ->get();
 
@@ -110,9 +109,6 @@ class Offer extends Model implements Transformable
             $offer->link = $response->offers[$i]->link;
             $offers->push($offer);
         }
-
-
-
         return $offers;
     }
 

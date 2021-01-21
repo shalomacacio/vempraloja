@@ -37,14 +37,6 @@
 							<div class="header-search">
 								<form action="{{ route('site.search')}}" method="GET">
 									@csrf
-
-									<select class="input-select" name="categoryId" required >
-										{{-- <option value=0>-- TODAS --</option> --}}
-										@foreach ($categories as $category)
-										<option value="{{ $category->id }}">{{ Str::limit($category->name, 8, '...')  }}</option>
-										@endforeach
-									</select>
-
 									<input class="input" placeholder="buscar aqui" name="name" required>
 									<button class="search-btn">Buscar</button>
 								</form>
