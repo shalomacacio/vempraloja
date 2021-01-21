@@ -23,7 +23,7 @@ class Client extends Model implements Transformable
     protected $fillable = [];
 
     protected $attributes = [
-        'baseUrl'=> 'http://sandbox-api.lomadee.com/v3/',
+        'baseUrl'=> 'https://api.lomadee.com/v3/',
         'sourceId'=> '36909873',
         'appToken' => '16066839633338f8feedc',
     ];
