@@ -39,7 +39,27 @@ class Offer extends Model implements Transformable
         return $this->belongsTo('App\Entities\Story', 'id', 'id');
     }
 
-    public function getById($id){
+    public function getById(Client $client, $storeId , $sku){
+        $response = Curl::to($client->baseUrl.$client->appToken.'/offer/_id/'.$sku)
+        ->withData(['sourceId'=>$client->sourceId, 'storeId'=> $storeId ,'size'=>'100'])
+        ->asJson() 
+        ->get();
+
+        $offers = collect(); 
+
+        for($i=0; $i < count($response->offers) ; $i++ ){
+            $offer = new Offer();
+            $offer->id = $response->offers[$i]->id;
+            $offer->name = $response->offers[$i]->name;
+            $offer->thumbnail = $response->offers[$i]->thumbnail;
+            // $offer->category = $response->offers[$i]->category;
+            $offer->price = $response->offers[$i]->price;
+            $offer->discount = $response->offers[$i]->discount;
+            $offer->link = $response->offers[$i]->link;
+            $offers->push($offer);
+        }
+
+        return $offers;
 
     }
 

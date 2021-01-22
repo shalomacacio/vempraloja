@@ -15,7 +15,8 @@ Route::get('/', 'SiteController@home')->name('site.home');
 Route::get('/offer/{id}', 'SiteController@offer')->name('site.offer');
 Route::get('/black', 'SiteController@black')->name('site.black');
 Route::get('/search', 'SiteController@search')->name('site.search');
-Route::get('/cursos', 'SiteController@cursos')->name('site.cursos');
+Route::get('/convert', 'SiteController@convert')->name('site.convert');
+Route::get('/getOffer', 'SiteController@getOffer')->name('site.getOffer');
 
 Route::get('/login', 'AuthController@login')->name('login');
 Route::post('/auth', 'AuthController@auth')->name('auth');

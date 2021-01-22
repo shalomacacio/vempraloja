@@ -8,18 +8,21 @@ use Ixudra\Curl\Facades\Curl;
 use App\Entities\Offer;
 use App\Entities\Category;
 use App\Entities\Client;
+use App\Entities\Store;
 
 class SiteController extends Controller
 {
     protected $client;
     protected $category;
     protected $offer;
+    protected $store;
 
-    public function __construct( Client $client, Category $category, Offer $offer)
+    public function __construct( Client $client, Category $category, Offer $offer, Store $store)
     {
         $this->client = $client;
         $this->category = $category;
         $this->offer = $offer;
+        $this->store =  $store;
     }
 
 
@@ -61,5 +64,17 @@ class SiteController extends Controller
     public function cursos(){
         // $links = Link::all();
         return view('site.cursos');
+    }
+
+    public function convert(){
+        $stores = $this->store->getAll($this->client);
+        return view('site.convert', compact('stores'));
+    }
+
+    public function getOffer(Request $request){
+        $stores = $this->store->getAll($this->client);
+        $offers = $this->offer->getById($this->client, $request->storeId, $request->sku);
+        
+        return view('site.convert', compact('offers', 'stores'));
     }
 }
