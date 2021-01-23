@@ -74,8 +74,8 @@
       var texto = "[MAGALU] - BAIXOUUU‼️  São 2 toalhas de banho e 2 toalhas para rosto 🚩 📦 Retire na loja e não pague frete ✅ Jogo de Toalha de Banho Atlântica Delicata – Garden Valentino 4 Peças 🔥 R$ 39,90 à vista 🛒 https://is.gd/sZUBZh"
       
       url = "https://api.whatsapp.com/send?"
-      +"picture="+ oferta.thumbnail;
-      +"text=https://www.americanas.com.br/produto/36401414?opn=AFLACOM&epar=b2wafiliados&franq=AFL-03-5875553";
+      // +"picture="+ oferta.thumbnail;
+      +"text="+ oferta.link;
       // +"text="+ oferta.link;
       options = 'toolbar=0,status=0,resizable=1,width=626,height=436,description=teste';
       window.open(url,'sharer',options);
