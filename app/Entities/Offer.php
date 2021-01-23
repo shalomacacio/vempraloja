@@ -35,9 +35,9 @@ class Offer extends Model implements Transformable
     //     return dd($response);
     // }
 
-    public function store(){
-        return $this->belongsTo('App\Entities\Story', 'id', 'id');
-    }
+    // public function store(){
+    //     return $this->belongsTo('App\Entities\Store', 'id', 'id');
+    // }
 
     public function getById(Client $client, $storeId , $sku){
         $response = Curl::to($client->baseUrl.$client->appToken.'/offer/_id/'.$sku)
@@ -52,7 +52,8 @@ class Offer extends Model implements Transformable
             $offer->id = $response->offers[$i]->id;
             $offer->name = $response->offers[$i]->name;
             $offer->thumbnail = $response->offers[$i]->thumbnail;
-            // $offer->category = $response->offers[$i]->category;
+            $offer->category = $response->offers[$i]->category->name;
+            $offer->store = $response->offers[$i]->store->thumbnail;
             $offer->price = $response->offers[$i]->price;
             $offer->discount = $response->offers[$i]->discount;
             $offer->link = $response->offers[$i]->link;
@@ -70,6 +71,8 @@ class Offer extends Model implements Transformable
         ->asJson()
         ->get();
 
+        // return dd($response);
+
         $offers = collect(); 
 
         for($i=0; $i < count($response->offers) ; $i++ ){
@@ -77,7 +80,8 @@ class Offer extends Model implements Transformable
             $offer->id = $response->offers[$i]->id;
             $offer->name = $response->offers[$i]->name;
             $offer->thumbnail = $response->offers[$i]->thumbnail;
-            // $offer->category = $response->offers[$i]->category;
+            $offer->category = $response->offers[$i]->category->name;
+            $offer->store = $response->offers[$i]->store->thumbnail;
             $offer->price = $response->offers[$i]->price;
             $offer->discount = $response->offers[$i]->discount;
             $offer->link = $response->offers[$i]->link;
@@ -123,6 +127,8 @@ class Offer extends Model implements Transformable
             $offer->id = $response->offers[$i]->id;
             $offer->name = $response->offers[$i]->name;
             $offer->thumbnail = $response->offers[$i]->thumbnail;
+            $offer->category = $response->offers[$i]->category->name;
+            $offer->store = $response->offers[$i]->store->thumbnail;
             $offer->price = $response->offers[$i]->price;
             $offer->discount = $response->offers[$i]->discount;
             $offer->link = $response->offers[$i]->link;

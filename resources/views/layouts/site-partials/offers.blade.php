@@ -16,10 +16,11 @@
                         <div class="product">
                             <div class="product-img">
                                 <center><img src="{{ $offer->thumbnail }}" alt="" width="100px" height="100px"></center>
-                                {{-- <div class="product-label">
-                                    <span class="sale">-30%</span>
-                                    <span class="new">NEW</span>
-                                </div> --}}
+                                <div class="product-label">
+                                  <div class="new"> <img src="{{ $offer->store }}"> </div>
+                                    {{-- <span class="sale">-30%</span>
+                                    <span class="new">NEW</span> --}}
+                                </div>
                             </div>
                             <div class="product-body">
                                 <p class="product-category">{{ $offer->category }}</p>
